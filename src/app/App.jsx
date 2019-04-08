@@ -11,7 +11,7 @@ import { store, persistor } from '../lib/store/configureStore';
 import { routes as Routes } from './constants';
 
 //  @TODO: Setup jest with enzyme
-//  @TODO: Configure, disable it for tests
+//  @TODO: Configure eslint, disable it for tests
 
 const App = ({ authenticated }) => (
   <ReduxProvider store={store}>
