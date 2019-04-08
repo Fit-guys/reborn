@@ -7,7 +7,18 @@
         "react/forbid-prop-types": 0
     },
     "globals": {
+        "fetch": false,
         "document": true,
-        "window": true
+        "jest": true,
+        "test": true,
+        "expect": true,
+        "describe": true,
+        "window": true,
+        "webpack": true,
+        "XMLHttpRequest": true,
+        "require": true,
+        "Element": true,
+        "navigator": true,
+        "it": true
     }
 }
