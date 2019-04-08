@@ -39,7 +39,8 @@ module.exports = {
     'node',
   ],
   watchPlugins: [
-    '/home/alexandr/ss/cu/reborn/node_modules/jest-watch-typeahead/filename.js',
-    '/home/alexandr/ss/cu/reborn/node_modules/jest-watch-typeahead/testname.js',
+    '<rootDir>/node_modules/jest-watch-typeahead/filename.js',
+    '<rootDir>/reborn/node_modules/jest-watch-typeahead/testname.js',
   ],
+  setupTestFrameworkScriptFile: '<rootDir>/src/tests/setupTest.js',
 };
