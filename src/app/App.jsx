@@ -1,44 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import { Provider as ReduxProvider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { connect } from 'react-redux';
 
 import { PrivateRoute } from '../lib/utils';
-import { store, persistor } from '../lib/store/configureStore';
+import { LandingPage, ProfilePage } from '../components/pages';
 
 import { routes as Routes } from './constants';
 
 const App = ({ authenticated }) => (
-  <ReduxProvider store={store}>
-    <PersistGate
-      loading={null}
-      persistor={persistor}
-    >
-      <Router>
-        {authenticated && <div>@TODO: app bar</div>}
+  <Router>
+    {authenticated && <div>@TODO: app bar</div>}
 
-        <Route
-          exact
-          path={Routes.SIGN_IN}
-          component={<div>@TODO: sign in</div>}
-        />
+    <Route
+      exact
+      path={Routes.LANDING}
+      component={LandingPage}
+    />
 
-        <PrivateRoute
-          exact
-          path={Routes.LANDING}
-          component={() => <div>@TODO: homepage</div>}
-          authenticated={authenticated}
-        />
+    <PrivateRoute
+      exact
+      path={Routes.PROFILE}
+      component={ProfilePage}
+      authenticated={authenticated}
+    />
 
-      </Router>
-    </PersistGate>
-  </ReduxProvider>
+  </Router>
 );
 
 App.propTypes = {
   authenticated: PropTypes.bool.isRequired,
 };
 
-export default App;
+const mapState = ({ user }) => ({
+  authenticated: user.authenticated,
+});
+
+export default connect(mapState)(App);
