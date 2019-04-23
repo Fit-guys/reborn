@@ -3,10 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider as ReduxProvider } from 'react-redux';
+import { MuiThemeProvider as ThemeProvider } from '@material-ui/core/styles';
 import App from './app/App';
 import * as serviceWorker from './serviceWorker';
 
 import { store, persistor } from './lib/store/configureStore';
+import defaultTheme from './lib/themes/default';
 
 const Root = () => (
   <ReduxProvider store={store}>
@@ -14,7 +16,9 @@ const Root = () => (
       loading={null}
       persistor={persistor}
     >
-      <App />
+      <ThemeProvider theme={defaultTheme}>
+        <App />
+      </ThemeProvider>
     </PersistGate>
   </ReduxProvider>
 );
