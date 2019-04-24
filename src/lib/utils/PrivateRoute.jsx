@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-import { routes } from '../../app/constants';
+import { Routes } from '../../app/constants';
 
 const PrivateRoute = ({
   component, exact = false, path, authenticated,
@@ -15,7 +15,7 @@ const PrivateRoute = ({
     ) : (
       <Redirect
         to={{
-          pathname: routes.SIGN_IN,
+          pathname: Routes.SIGN_IN,
           state: { from: props.location },
         }}
       />

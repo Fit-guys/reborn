@@ -1,20 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { AppBar, Button } from '@material-ui/core';
+import {
+  AppBar, withStyles, Toolbar,
+} from '@material-ui/core';
 
-const NavBar = ({ authenticated }) => {
-  console.log(authenticated);
+import NavLink from './NavLink';
 
-  return (
-    <AppBar>
-      <Button />
+import { Routes } from '../../app/constants';
+
+import styles from './styles';
+
+const NavBar = ({ authenticated, classes }) => (
+  <div className={classes.rootDefault}>
+    <AppBar position="sticky" className={classes.rootDefault}>
+      <Toolbar className={classes.toolbar}>
+
+        {authenticated && (
+          <NavLink to={Routes.PROFILE}>
+            profile
+          </NavLink>
+        )}
+
+      </Toolbar>
     </AppBar>
-  );
-};
+  </div>
+);
 
 NavBar.propTypes = {
   authenticated: PropTypes.bool.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
-export default NavBar;
+export default withStyles(styles)(NavBar);

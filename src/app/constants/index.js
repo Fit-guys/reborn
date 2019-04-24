@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import * as routes from './routes';
+import * as Routes from './routes';
 
 export {
-  routes,
+  Routes,
 };

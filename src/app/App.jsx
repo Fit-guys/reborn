@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { PrivateRoute } from '../lib/utils';
 import { LandingPage, ProfilePage } from '../components/pages';
 
-import { routes as Routes } from './constants';
+import { Routes } from './constants';
 import NavBar from '../components/nav-bar/NavBar';
 
 const App = ({ authenticated }) => (
