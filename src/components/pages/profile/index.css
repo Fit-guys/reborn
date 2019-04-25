@@ -1,0 +1,81 @@
+.div {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.img-background {
+   position: fixed;
+   height: 100%;
+   width: 100%;
+   z-index: -1;
+   background-size: fixed;
+   background-repeat: no-repeat;
+   background-position: center center;
+   margin-top: -53px;
+}
+
+.column { 
+   height: 100pc;
+   background-color: white;
+}
+
+
+.user-image {
+   margin-left: 20px;
+   margin-top: 0px;
+}
+
+.user-image-container {
+   position: fixed;
+      width: 200px;
+      height: 200px;
+}
+
+.Grid {
+   position: fixed;
+   height: 100vh;
+   grid-gap: 10px;
+}
+
+.user-info-container {
+   width: 100%;
+   height: 100%;
+}
+
+.progress-bar {
+   width: 100%;
+   height: 100%;
+}
+
+.info-container {
+   width: 250px;
+   margin-top: 250px;
+   margin-left: 40px;
+   flex-grow: initial;
+}
+.top-part {
+   text-align: center;
+}
+
+.bottom-part {
+   text-align: left;
+   justify-content: flex-end;
+}
+
+ .share-button-image {
+   width: 35px;
+   padding: 5px;
+   border: 0;
+   box-shadow: 0;
+   display: inline;
+}
+
+.links-container {
+   width: 100%;
+}
+
+.line{
+   width: 112px;
+   height: 47px;
+   border-bottom: 1px solid black;
+}
