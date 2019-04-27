@@ -1,3 +1,7 @@
+* {
+   margin: 0;
+   padding: 0;
+}
 .div {
     overflow-y: hidden;
     overflow-x: hidden;
@@ -11,7 +15,7 @@
    background-size: fixed;
    background-repeat: no-repeat;
    background-position: center center;
-   margin-top: -53px;
+   margin-top: -65px;
 }
 
 .column { 
@@ -21,8 +25,7 @@
 
 
 .user-image {
-   margin-left: 20px;
-   margin-top: 0px;
+   
 }
 
 .user-image-container {
@@ -31,10 +34,9 @@
       height: 200px;
 }
 
-.Grid {
+.grid-container {
    position: fixed;
    height: 100vh;
-   grid-gap: 10px;
 }
 
 .user-info-container {
@@ -48,34 +50,43 @@
 }
 
 .info-container {
-   width: 250px;
-   margin-top: 250px;
-   margin-left: 40px;
-   flex-grow: initial;
+   
 }
 .top-part {
    text-align: center;
 }
 
-.bottom-part {
-   text-align: left;
-   justify-content: flex-end;
-}
-
  .share-button-image {
-   width: 35px;
+   width: 50px;
    padding: 5px;
    border: 0;
    box-shadow: 0;
    display: inline;
 }
 
-.links-container {
-   width: 100%;
-}
-
 .line{
+   margin-top: -12px;
    width: 112px;
    height: 47px;
-   border-bottom: 1px solid black;
+   border-bottom: 1px solid #41254E;
 }
+
+@media all and (max-width: 800px) {
+   .grid-container{
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      justify-content: flex-start;
+      flex-flow: row wrap;
+      
+   }
+   .progress-bar {
+      opacity: 0;
+   }
+
+   .user-image{
+      opacity: 1;
+   }
+}
+
+
