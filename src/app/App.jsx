@@ -5,23 +5,31 @@ import { connect } from 'react-redux';
 
 import { PrivateRoute } from '../lib/utils';
 import { LandingPage, ProfilePage } from '../components/pages';
+import GameMap from '../components/game';
 
 import { routes as Routes } from './constants';
 
 const App = ({ authenticated }) => (
   <Router>
-    {authenticated && <div>@TODO: app bar</div>}
+    {authenticated && <div />}
 
     <Route
       exact
-      path={Routes.LANDING}
-      component={LandingPage}
+      path="/"
+      component={GameMap}
     />
 
     <PrivateRoute
       exact
       path={Routes.PROFILE}
       component={ProfilePage}
+      authenticated={authenticated}
+    />
+
+    <PrivateRoute
+      exact
+      path={Routes.LANDING}
+      component={LandingPage}
       authenticated={authenticated}
     />
 

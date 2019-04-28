@@ -7,8 +7,8 @@ export default class ProfilePage extends Component {
 
   render() {
     return (
-      <div>
-        this is profile
+      <div style={{ textAlign: 'center' }}>
+        <h1>Hello World</h1>
       </div>
     );
   }
