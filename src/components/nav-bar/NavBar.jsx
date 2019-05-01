@@ -13,8 +13,14 @@ import styles from './styles';
 
 const NavBar = ({ authenticated, classes }) => (
   <div className={classes.rootDefault}>
-    <AppBar position="sticky" className={classes.rootDefault}>
+    <AppBar position="absolute" className={classes.rootDefault}>
       <Toolbar className={classes.toolbar}>
+
+        {authenticated && (
+          <NavLink to={Routes.PROFILE}>
+            profile
+          </NavLink>
+        )}
 
         {authenticated && (
           <NavLink to={Routes.PROFILE}>
