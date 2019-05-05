@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 
-import { user } from './reducers';
+import { user, ui } from './reducers';
 
 const middleware = [thunk];
 
@@ -19,6 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const rootReducer = combineReducers({
   user,
+  ui,
 });
 
 const rootPersistConfig = {

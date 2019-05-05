@@ -7,6 +7,7 @@ import {
 import UserProgress from './UserProgress';
 
 import headerImage from '../images/profile_header.png';
+import userImage from '../images/user.jpg';
 import styles from './profile.styles';
 
 class ProfilePage extends Component {
@@ -32,7 +33,7 @@ class ProfilePage extends Component {
         </div>
         <div className={classes.contentRoot}>
           <div className={classes.userInfo}>
-            <Avatar src="https://www.google.com.ua/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjhseWV4vrhAhVSpIsKHa6mD38QjRx6BAgBEAU&url=https%3A%2F%2Fwww.facebook.com%2Fpurpleunicornranchi%2F&psig=AOvVaw2W90hjp_Xr_vjNiJ_Og9au&ust=1556815057628016" className={classes.avatar} />
+            <Avatar src={userImage} className={classes.avatar} />
             <div className={classes.userTextInfo}>
               <Typography variant="h5" className={classes.nickname} gutterBottom color="primary">
                 samplenick

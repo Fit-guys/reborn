@@ -1,0 +1,74 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import {
+  Modal,
+  Button,
+  Paper,
+  withStyles,
+  Tabs,
+  Tab,
+} from '@material-ui/core';
+
+import { toggleAuthModal } from '../../../lib/store/action-creators';
+
+import LoginForm from '../LoginForm';
+import SignUpForm from '../SignUpForm';
+
+import styles from './authModal.styles';
+
+const AuthModal = ({ classes, open, toggle }) => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <>
+      <Button
+        variant="outlined"
+        color="primary"
+        size="large"
+        onClick={toggle}
+      >
+        Вхид
+      </Button>
+      <Modal
+        open={open}
+        onClose={toggle}
+        classes={{ root: classes.modalRoot }}
+      >
+        <Paper className={classes.modal}>
+          <Tabs
+            className={classes.tabs}
+            classes={{ indicator: classes.tabIndicator }}
+            value={activeTab}
+            onChange={(_, value) => { setActiveTab(value); }}
+          >
+            <Tab label="Увийты" />
+            <Tab label="Зарееструватыся" />
+          </Tabs>
+          <div className={classes.formRoot}>
+            {activeTab === 0 && <LoginForm callback={() => {}} />}
+            {activeTab === 1 && <SignUpForm callback={() => {}} />}
+          </div>
+        </Paper>
+      </Modal>
+    </>
+  );
+};
+
+AuthModal.propTypes = {
+  classes: PropTypes.object.isRequired,
+  open: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
+};
+
+const mapState = ({ ui }) => ({
+  open: ui.authModalOpen,
+});
+
+const mapDispatch = dispatch => bindActionCreators({
+  toggle: toggleAuthModal,
+}, dispatch);
+
+export default connect(mapState, mapDispatch)(withStyles(styles)(AuthModal));

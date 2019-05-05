@@ -1,7 +1,7 @@
 import { user as actionTypes } from '../action-types';
 
 const initialState = {
-  authenticated: true,
+  authenticated: false,
   token: '',
   id: '',
 };

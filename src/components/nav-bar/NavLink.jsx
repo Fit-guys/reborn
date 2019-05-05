@@ -6,6 +6,9 @@ import { Routes } from '../../app/constants';
 
 const NavLink = ({ to, children, ...buttonProps }) => (
   <Button
+    variant="outlined"
+    color="primary"
+    size="large"
     {...buttonProps}
     href={to}
   >

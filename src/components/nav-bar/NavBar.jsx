@@ -10,6 +10,7 @@ import NavLink from './NavLink';
 import { Routes } from '../../app/constants';
 
 import styles from './styles';
+import AuthModal from '../auth/auth-modal/AuthModal';
 
 const NavBar = ({ authenticated, classes }) => (
   <div className={classes.rootDefault}>
@@ -22,11 +23,7 @@ const NavBar = ({ authenticated, classes }) => (
           </NavLink>
         )}
 
-        {authenticated && (
-          <NavLink to={Routes.PROFILE}>
-            profile
-          </NavLink>
-        )}
+        {!authenticated && <AuthModal /> }
 
       </Toolbar>
     </AppBar>

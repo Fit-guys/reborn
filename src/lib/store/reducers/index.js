@@ -1,6 +1,7 @@
 import user from './user';
+import ui from './ui';
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
+  ui,
   user,
 };
