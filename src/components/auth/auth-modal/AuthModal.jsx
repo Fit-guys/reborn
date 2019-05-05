@@ -30,7 +30,7 @@ const AuthModal = ({ classes, open, toggle }) => {
         size="large"
         onClick={toggle}
       >
-        Вхид
+        Вхiд
       </Button>
       <Modal
         open={open}
@@ -44,8 +44,8 @@ const AuthModal = ({ classes, open, toggle }) => {
             value={activeTab}
             onChange={(_, value) => { setActiveTab(value); }}
           >
-            <Tab label="Увийты" />
-            <Tab label="Зарееструватыся" />
+            <Tab label="Вхiд" />
+            <Tab label="Регiстрацiя" />
           </Tabs>
           <div className={classes.formRoot}>
             {activeTab === 0 && <LoginForm callback={() => {}} />}

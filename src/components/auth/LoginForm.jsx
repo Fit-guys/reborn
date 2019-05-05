@@ -51,7 +51,7 @@ class LoginForm extends Component {
       <>
         <TextField
           type="text"
-          label="Логын"
+          label="Логiн"
           variant="outlined"
           color="primary"
           className={classes.textField}

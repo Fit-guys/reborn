@@ -19,7 +19,7 @@ const NavBar = ({ authenticated, classes }) => (
 
         {authenticated && (
           <NavLink to={Routes.PROFILE}>
-            profile
+            Профiль
           </NavLink>
         )}
 

@@ -51,7 +51,7 @@ class ProfilePage extends Component {
                 size="large"
                 className={classes.gameButton}
               >
-                Початы Граты
+                Почати Гру
               </Button>
 
               <Typography
@@ -79,7 +79,7 @@ class ProfilePage extends Component {
                 component="h6"
                 color="primary"
               >
-                подилытыся
+                подiлитися
               </Typography>
 
             </div>

@@ -46,7 +46,7 @@ class LandingPage extends Component {
               className={classes.getStartedButton}
               {...getStaertedActionProps}
             >
-              поъхалы
+              Почати квест
             </Button>
           </div>
         </div>

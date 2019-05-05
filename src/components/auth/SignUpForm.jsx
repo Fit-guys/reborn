@@ -58,7 +58,7 @@ class SignUpForm extends Component {
       <>
         <TextField
           type="text"
-          label="Имя корыстувача"
+          label="Им'я користувача"
           variant="outlined"
           color="primary"
           className={classes.textField}
@@ -66,7 +66,7 @@ class SignUpForm extends Component {
         />
         <TextField
           type="text"
-          label="Емэйл"
+          label="Емейл"
           variant="outlined"
           color="primary"
           className={classes.textField}
@@ -82,7 +82,7 @@ class SignUpForm extends Component {
         />
         <TextField
           type="text"
-          label="Грае роль"
+          label="Пiдтвердження паролю"
           variant="outlined"
           color="primary"
           className={classes.textField}
@@ -97,7 +97,7 @@ class SignUpForm extends Component {
           className={classes.submit}
           onClick={this.handleSubmit}
         >
-          Зарээструватыся
+          Зареєструватися
         </Button>
       </>
     );
