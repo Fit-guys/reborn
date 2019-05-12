@@ -27,7 +27,7 @@ const DeveloperInfo = ({
             {name}
           </Typography>
           <Typography classes={{ root: classes.text }} component="div">
-            {roles.map(role => <div>{role}</div>)}
+            {roles.map(role => <div key={role}>{role}</div>)}
           </Typography>
         </CardContent>
       </CardMedia>

@@ -1,13 +1,13 @@
 export default () => ({
   card: {
-    width: 280,
-    height: 340,
+    width: '20vw',
+    height: '35vh',
     borderRadius: '8px',
     background: 'none',
   },
   media: {
     backgroundOrigin: 'border-box',
-    height: 340,
+    height: '35vh',
     borderRadius: '8px',
     display: 'flex',
     alignItems: 'flex-end',

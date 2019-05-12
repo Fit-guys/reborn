@@ -8,6 +8,7 @@ import { LandingPage, ProfilePage } from '../components/pages';
 
 import { Routes } from './constants';
 import NavBar from '../components/nav-bar/NavBar';
+import Game from '../components/pages/game/Game';
 
 const App = ({ authenticated }) => (
   <Router>
@@ -23,6 +24,13 @@ const App = ({ authenticated }) => (
       exact
       path={Routes.PROFILE}
       component={ProfilePage}
+      authenticated={authenticated}
+    />
+
+    <PrivateRoute
+      exact
+      path={Routes.GAME}
+      component={Game}
       authenticated={authenticated}
     />
 

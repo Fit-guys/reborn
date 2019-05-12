@@ -1,48 +1,91 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import {
   withStyles, Avatar, Typography, Button, Grid,
 } from '@material-ui/core';
+import { getUser } from '../../../lib/store/action-creators/user';
 
 import UserProgress from './UserProgress';
 
 import headerImage from '../images/profile_header.png';
-import userImage from '../images/user.jpg';
 import styles from './profile.styles';
+import Api, { Endpoints } from '../../../lib/networking';
+import { Routes } from '../../../app/constants';
 
 class ProfilePage extends Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    user: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
+    user: PropTypes.object.isRequired,
+    token: PropTypes.string.isRequired,
+    getUser: PropTypes.func.isRequired,
   }
 
-  componentDidMount() {
+  state = {
+    userLoaded: false,
+    error: '',
+  }
 
+  async componentDidMount() {
+    await this.getUser();
+    const { user } = this.props;
+
+    if (user.name) {
+      this.setState({ userLoaded: true });
+    }
+  }
+
+  getUser = async () => {
+    // eslint-disable-next-line no-shadow
+    const { token, getUser } = this.props;
+    const json = await Api.get(Endpoints.GET_USER, { Authorization: `Bearer ${token}` });
+
+    const { status, user } = json;
+
+    if (!status) {
+      this.setState({ error: json.message });
+      return;
+    }
+
+    await getUser(user);
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, user } = this.props;
+    const { userLoaded, error } = this.state;
+
+    if (error) {
+      return error;
+    }
+
+    if (!userLoaded) {
+      return 'loading';
+    }
+
+    console.log(user);
 
     return (
       <div className={classes.root}>
         <div className={classes.headerRoot}>
-          <img src={headerImage} alt="background" className="img-background" />
+          <img src={headerImage} alt="background" className={classes.backImg} />
         </div>
         <div className={classes.contentRoot}>
           <div className={classes.userInfo}>
-            <Avatar src={userImage} className={classes.avatar} />
+            <Avatar
+              src="https://cdn22.img.ria.ru/images/155255/64/1552556441_0:1:800:451_600x0_80_0_0_dd5f77200f0f5b96dbd6dc2c2420e20c.png"
+              style={{ background: 'pink' }}
+              className={classes.avatar}
+            />
             <div className={classes.userTextInfo}>
               <Typography variant="h5" className={classes.nickname} gutterBottom color="primary">
-                samplenick
+                {user.status}
+                {' '}
+                gun
               </Typography>
               <Typography variant="h4" className={classes.rank} gutterBottom color="primary">
-                СЕРЖАНТ
-              </Typography>
-              <Typography component="h6" gutterBottom color="primary">
-                gun
+                {user.name}
               </Typography>
 
               <Button
@@ -50,6 +93,7 @@ class ProfilePage extends Component {
                 variant="contained"
                 size="large"
                 className={classes.gameButton}
+                href={Routes.GAME}
               >
                 Почати Гру
               </Button>
@@ -61,15 +105,11 @@ class ProfilePage extends Component {
                 component="h6"
                 color="primary"
               >
-                про мене
+                Email
               </Typography>
 
-              <Typography variant="h6" className={classes.additionalUserInfo} component="h6" gutterBottom color="primary">
-                ajsgda askdgj
-              </Typography>
-
-              <Typography variant="h6" className={classes.additionalUserInfo} component="h6" gutterBottom color="primary">
-                aksgdsajs asjkdg
+              <Typography variant="subtitle1" className={classes.additionalUserInfo} component="h6" gutterBottom color="primary">
+                {user.email}
               </Typography>
 
               <Typography
@@ -79,7 +119,29 @@ class ProfilePage extends Component {
                 component="h6"
                 color="primary"
               >
-                подiлитися
+                Результаты
+              </Typography>
+
+              <Typography variant="h6" className={classes.additionalUserInfo} component="h6" gutterBottom color="primary">
+                Total Score:
+                {' '}
+                {user.totalScore}
+              </Typography>
+
+              <Typography variant="h6" className={classes.additionalUserInfo} component="h6" gutterBottom color="primary">
+                Time Played:
+                {' '}
+                {user.totalTime}
+              </Typography>
+
+              <Typography
+                gutterBottom
+                className={classes.userInfoHeading}
+                variant="h6"
+                component="h6"
+                color="primary"
+              >
+                Подiлитися
               </Typography>
 
             </div>
@@ -119,4 +181,13 @@ class ProfilePage extends Component {
   }
 }
 
-export default withStyles(styles)(ProfilePage);
+const mapState = ({ user }) => ({
+  token: user.token,
+  user: user.user,
+});
+
+const mapDispatch = dispatch => bindActionCreators({
+  getUser,
+}, dispatch);
+
+export default connect(mapState, mapDispatch)(withStyles(styles)(ProfilePage));

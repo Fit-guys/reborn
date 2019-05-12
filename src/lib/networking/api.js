@@ -1,15 +1,44 @@
-const isDEV = process.env.NODE_ENV !== 'production';
-const API_URL = isDEV ? '127.0.0.1:3000' : 'our-prod-url:port';
+import 'whatwg-fetch';
 
-const postOptions = {
-  method: 'post',
-};
+export default class Api {
+  static URL = 'http://localhost:3000/v1';
 
-export const post = (endpoint, additionalOptions) => {
-  const url = API_URL + endpoint;
+  static OPTIONS = {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  };
 
-  return fetch(url, Object.assign(postOptions, additionalOptions))
-    .then(res => res.json());
-};
+  static async get(endpoint, headers = {}) {
+    const options = { ...Api.OPTIONS };
+    Object.keys(headers).forEach((key) => {
+      options.headers[key] = headers[key];
+    });
 
-export const get = endpoint => fetch(API_URL + endpoint).then(res => res.json());
+    const response = await window.fetch(Api.URL + endpoint, {
+      ...options,
+      method: 'get',
+    });
+
+    const json = await response.json();
+
+    return json;
+  }
+
+  static async post(endpoint, body, headers = {}) {
+    const options = { ...Api.OPTIONS };
+    Object.keys(headers).forEach((key) => {
+      options.headers[key] = headers[key];
+    });
+
+    const response = await window.fetch(Api.URL + endpoint, {
+      ...options,
+      method: 'post',
+      body: JSON.stringify(body),
+    });
+
+    const json = await response.json();
+
+    return json;
+  }
+}

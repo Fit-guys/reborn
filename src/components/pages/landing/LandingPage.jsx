@@ -28,7 +28,7 @@ class LandingPage extends Component {
     return (
       <div className={classes.root}>
         <div
-          style={{ background: `url(${backgroundImage}) center center no-repeat` }}
+          style={{ background: `url(${backgroundImage}) center center no-repeat`, backgroundSize: 'cover' }}
           className={classes.firstLook}
         >
           <div className={classes.getStartedRoot}>
@@ -55,23 +55,74 @@ class LandingPage extends Component {
           className={classes.aboutUsRoot}
         >
           <div className={classes.row}>
-            {developers.splice(0, 3).map(developer => <DeveloperInfo {...developer} />)}
+            <Typography
+              variant="h4"
+              color="secondary"
+              style={{
+                marginTop: '50px',
+              }}
+              className={classes.getStartedCaption}
+            >
+              Хто ми?
+            </Typography>
+          </div>
+          <div className={classes.row}>
+            {developers
+              .splice(0, 3)
+              .map(developer => <DeveloperInfo key={developer.name} {...developer} />)}
           </div>
 
           <div className={classes.row}>
-            {developers.map(developer => <DeveloperInfo {...developer} />)}
+            {developers.map(developer => <DeveloperInfo key={developer.name} {...developer} />)}
           </div>
         </div>
         <div
           className={`${classes.techWeUse} ${classes.aboutUsRoot}`}
         >
           <div className={classes.row}>
-            {technologies.splice(0, 3).map(developer => <TechnologyInfo {...developer} />)}
+            <Typography
+              variant="h4"
+              color="primary"
+              style={{
+                marginTop: '50px',
+              }}
+              className={classes.getStartedCaption}
+            >
+              Що ми використовуємо?
+            </Typography>
+          </div>
+          <div className={classes.row}>
+            {technologies.splice(0, 3).map(tech => <TechnologyInfo key={tech.name} {...tech} />)}
           </div>
 
           <div className={classes.row}>
-            {technologies.map(developer => <TechnologyInfo {...developer} />)}
+            {technologies.map(tech => <TechnologyInfo key={tech.name} {...tech} />)}
           </div>
+        </div>
+        <div
+          style={{
+            background: '#32153a center center no-repeat fixed',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+          }}
+          className={classes.aboutUsRoot}
+        >
+
+          <Typography
+            variant="h4"
+            color="secondary"
+            style={{
+              marginTop: '50px',
+            }}
+            className={classes.getStartedCaption}
+          >
+              Де ми?
+          </Typography>
+          <div
+            dangerouslySetInnerHTML={{ __html: '<div class="mapouter"><div class="gmap_canvas"><iframe width="900" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=%D0%9A%D0%B8%D0%B5%D0%B2%20%D0%B1%D0%BE%D0%B3%D0%B4%D0%B0%D0%BD%D0%B0%20%D0%B3%D0%B0%D0%B2%D1%80%D0%B8%D0%BB%D0%B8%D1%88%D0%B8%D0%BD%D0%B0%2024&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{position:relative;text-align:right;height:500px;width:900px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:900px;}</style></div>' }}
+          />
         </div>
       </div>
     );

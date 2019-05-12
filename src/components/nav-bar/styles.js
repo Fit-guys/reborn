@@ -14,6 +14,6 @@ export default {
   },
   toolbar: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
 };

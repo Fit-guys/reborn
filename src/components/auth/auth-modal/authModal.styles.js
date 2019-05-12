@@ -7,6 +7,7 @@ export default () => ({
   },
   modal: {
     width: '30%',
+    minWidth: '300px',
     height: 'auto',
     borderRadius: '8px',
     display: 'flex',

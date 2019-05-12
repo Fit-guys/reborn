@@ -12,8 +12,8 @@ import {
 
 import { signUp } from '../../lib/store/action-creators/user';
 
-
 import styles from './auth.styles';
+import Api, { Endpoints } from '../../lib/networking';
 
 class SignUpForm extends Component {
   state = {
@@ -31,7 +31,18 @@ class SignUpForm extends Component {
   }
 
   validate = () => {
+    const {
+      username, email, password, passConfirm,
+    } = this.state;
+    if (!passConfirm || !password || !email || !username) {
+      return 'Ви заповнили не всi поля!';
+    }
 
+    if (passConfirm !== password) {
+      return 'Паролi не спiвпадають';
+    }
+
+    return null;
   }
 
   handleSubmit = async () => {
@@ -41,11 +52,22 @@ class SignUpForm extends Component {
       this.setState({ error });
       return;
     }
+    const { username, email, password } = this.state;
+    const json = await Api.post(Endpoints.USER_REGISTER, {
+      name: username,
+      email,
+      password,
+    });
+
+    if (!json.status) {
+      this.setState({ error: 'error' });
+      return;
+    }
 
     // eslint-disable-next-line no-shadow
-    const { callback, signUp } = this.props;
-    await signUp();
-
+    const { signUp, callback } = this.props;
+    const { expiresIn, userToken } = json;
+    await signUp(userToken, expiresIn);
     callback();
   }
 
@@ -61,6 +83,7 @@ class SignUpForm extends Component {
           label="Им'я користувача"
           variant="outlined"
           color="primary"
+          onChange={this.handleFormFieldChange('username')}
           className={classes.textField}
           value={username}
         />
@@ -69,6 +92,7 @@ class SignUpForm extends Component {
           label="Емейл"
           variant="outlined"
           color="primary"
+          onChange={this.handleFormFieldChange('email')}
           className={classes.textField}
           value={email}
         />
@@ -76,15 +100,17 @@ class SignUpForm extends Component {
           variant="outlined"
           color="primary"
           type="password"
+          onChange={this.handleFormFieldChange('password')}
           className={classes.textField}
           label="Пароль"
           value={password}
         />
         <TextField
-          type="text"
+          type="password"
           label="Пiдтвердження паролю"
           variant="outlined"
           color="primary"
+          onChange={this.handleFormFieldChange('passConfirm')}
           className={classes.textField}
           value={passConfirm}
         />

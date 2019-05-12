@@ -17,10 +17,15 @@ import { toggleAuthModal } from '../../../lib/store/action-creators';
 import LoginForm from '../LoginForm';
 import SignUpForm from '../SignUpForm';
 
+import { Routes } from '../../../app/constants';
 import styles from './authModal.styles';
 
 const AuthModal = ({ classes, open, toggle }) => {
   const [activeTab, setActiveTab] = useState(0);
+
+  const redirectToProfile = () => {
+    window.location.pathname = Routes.PROFILE;
+  };
 
   return (
     <>
@@ -28,6 +33,7 @@ const AuthModal = ({ classes, open, toggle }) => {
         variant="outlined"
         color="primary"
         size="large"
+        style={{ marginRight: '25px' }}
         onClick={toggle}
       >
         Вхiд
@@ -48,8 +54,8 @@ const AuthModal = ({ classes, open, toggle }) => {
             <Tab label="Регiстрацiя" />
           </Tabs>
           <div className={classes.formRoot}>
-            {activeTab === 0 && <LoginForm callback={() => {}} />}
-            {activeTab === 1 && <SignUpForm callback={() => {}} />}
+            {activeTab === 0 && <LoginForm callback={redirectToProfile} />}
+            {activeTab === 1 && <SignUpForm callback={redirectToProfile} />}
           </div>
         </Paper>
       </Modal>

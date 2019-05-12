@@ -1,38 +1,100 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import {
-  AppBar, withStyles, Toolbar,
+  AppBar,
+  withStyles, Toolbar, Typography, Button,
 } from '@material-ui/core';
 
+import { bindActionCreators } from 'redux';
 import NavLink from './NavLink';
-
 import { Routes } from '../../app/constants';
+import { logOut } from '../../lib/store/action-creators/user';
 
 import styles from './styles';
 import AuthModal from '../auth/auth-modal/AuthModal';
+import SettingsMogal from '../settings/SettingsMogal';
 
-const NavBar = ({ authenticated, classes }) => (
-  <div className={classes.rootDefault}>
-    <AppBar position="absolute" className={classes.rootDefault}>
-      <Toolbar className={classes.toolbar}>
+class NavBar extends Component {
+  constructor(props) {
+    super(props);
 
-        {authenticated && (
-          <NavLink to={Routes.PROFILE}>
-            Профiль
-          </NavLink>
-        )}
+    this.state = {
+      transparency: 0,
+    };
 
-        {!authenticated && <AuthModal /> }
+    window.addEventListener('scroll', () => {
+      const position = window.scrollY;
+      const transparent = position / 100;
 
-      </Toolbar>
-    </AppBar>
-  </div>
-);
+      if (transparent < 1.5) {
+        this.setState({ transparency: transparent > 1 ? 1 : transparent });
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.setState({ transparency: window.scrollY / 100 > 1 ? 1 : (window.scrollY / 100) });
+  }
+
+  render() {
+    // eslint-disable-next-line no-shadow
+    const { classes, authenticated, logOut } = this.props;
+    const { transparency } = this.state;
+    const isGame = window.location.pathname === Routes.GAME;
+    const buttonsColor = window.location.pathname === Routes.PROFILE && transparency < 0.3 ? 'secondary' : 'primary';
+    const buttonsVariant = (window.location.pathname === Routes.PROFILE && transparency < 0.3) || isGame ? 'contained' : 'outlined';
+    return (
+      <div>
+        <AppBar
+          position={isGame ? 'absolute' : 'fixed'}
+          className={!transparency || isGame ? classes.rootDefault : classes.rootScrolled}
+          style={{ background: `rgba(255, 255, 255, ${transparency})` }}
+        >
+          <Toolbar className={classes.toolbar}>
+            <Typography color={transparency > 0.4 || isGame ? 'primary' : 'secondary'} variant="h6" noWrap>
+              Cyber Unicorns
+            </Typography>
+
+            <div>
+              {authenticated && (
+              <NavLink variant={buttonsVariant} to={Routes.PROFILE} style={{ marginRight: '25px' }} color={buttonsColor}>
+                Профiль
+              </NavLink>
+              )}
+
+              {!authenticated && <AuthModal /> }
+
+              {authenticated && <SettingsMogal color={buttonsColor} variant={buttonsVariant} />}
+
+              {authenticated && (
+              <Button
+                variant={buttonsVariant}
+                color={buttonsColor}
+                size="large"
+                onClick={logOut}
+              >
+              Вийти
+              </Button>
+              ) }
+            </div>
+
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
+}
 
 NavBar.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
+  logOut: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(NavBar);
+const mapDispatch = dispatch => bindActionCreators({
+  logOut,
+}, dispatch);
+
+export default connect(null, mapDispatch)(withStyles(styles)(NavBar));

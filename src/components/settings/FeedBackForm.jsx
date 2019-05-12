@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 import { withStyles, TextField, Button } from '@material-ui/core';
-import { logIn } from '../../lib/store/action-creators/user';
 
-import styles from './auth.styles';
+import styles from '../auth/auth.styles';
 import Api, { Endpoints } from '../../lib/networking';
 
-class LoginForm extends Component {
+class PasswordResetForm extends Component {
   state = {
-    login: '',
-    password: '',
+    feedback: '',
 
     error: '',
   }
 
   validate = () => {
-    const { login, password } = this.state;
+    const { feedback } = this.state;
 
-    if (!login || !password) {
-      return 'Якесь поле пусте як твоя голова.';
+    if (!feedback) {
+      return 'Дiдько! Це поле не повинно бути пустим.';
     }
 
     return null;
@@ -42,7 +37,7 @@ class LoginForm extends Component {
       this.setState({ error });
       return;
     }
-    const { login, password } = this.state;
+    const { passwordConfirm: login, password } = this.state;
     const json = await Api.post(Endpoints.USER_LOGIN, {
       email: login,
       password,
@@ -61,28 +56,20 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { login, password, error } = this.state;
+    const { feedback, error } = this.state;
     const { classes } = this.props;
 
     return (
       <>
-        <TextField
-          type="text"
-          label="Логiн"
-          variant="outlined"
-          color="primary"
-          className={classes.textField}
-          onChange={this.handleFormFieldChange('login')}
-          value={login}
-        />
+
         <TextField
           variant="outlined"
           color="primary"
-          type="password"
+          type="textarea"
           className={classes.textField}
           label="Пароль"
-          onChange={this.handleFormFieldChange('password')}
-          value={password}
+          onChange={this.handleFormFieldChange('feedback')}
+          value={feedback}
         />
 
         {error && error}
@@ -100,16 +87,12 @@ class LoginForm extends Component {
   }
 }
 
-LoginForm.propTypes = {
+PasswordResetForm.propTypes = {
   classes: PropTypes.object.isRequired,
   logIn: PropTypes.func.isRequired,
   callback: PropTypes.func.isRequired,
 };
 
-const StyledLoginForm = withStyles(styles)(LoginForm);
+const StyledLoginForm = withStyles(styles)(PasswordResetForm);
 
-const mapDispatch = dispatch => bindActionCreators({
-  logIn,
-}, dispatch);
-
-export default connect(null, mapDispatch)(StyledLoginForm);
+export default StyledLoginForm;

@@ -7,22 +7,26 @@ import { connect } from 'react-redux';
 import { withStyles, TextField, Button } from '@material-ui/core';
 import { logIn } from '../../lib/store/action-creators/user';
 
-import styles from './auth.styles';
+import styles from '../auth/auth.styles';
 import Api, { Endpoints } from '../../lib/networking';
 
-class LoginForm extends Component {
+class PasswordResetForm extends Component {
   state = {
-    login: '',
+    passwordConfirm: '',
     password: '',
 
     error: '',
   }
 
   validate = () => {
-    const { login, password } = this.state;
+    const { passwordConfirm, password } = this.state;
 
-    if (!login || !password) {
-      return 'Якесь поле пусте як твоя голова.';
+    if (!passwordConfirm || !password) {
+      return 'Ви заповнили не всi поля!';
+    }
+
+    if (passwordConfirm !== password) {
+      return 'Паролi не спiвпадають';
     }
 
     return null;
@@ -42,7 +46,7 @@ class LoginForm extends Component {
       this.setState({ error });
       return;
     }
-    const { login, password } = this.state;
+    const { passwordConfirm: login, password } = this.state;
     const json = await Api.post(Endpoints.USER_LOGIN, {
       email: login,
       password,
@@ -61,28 +65,29 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { login, password, error } = this.state;
+    const { passwordConfirm: login, password, error } = this.state;
     const { classes } = this.props;
 
     return (
       <>
-        <TextField
-          type="text"
-          label="Логiн"
-          variant="outlined"
-          color="primary"
-          className={classes.textField}
-          onChange={this.handleFormFieldChange('login')}
-          value={login}
-        />
+
         <TextField
           variant="outlined"
           color="primary"
           type="password"
           className={classes.textField}
-          label="Пароль"
+          label="Новий Пароль"
           onChange={this.handleFormFieldChange('password')}
           value={password}
+        />
+        <TextField
+          type="text"
+          label="Пiдтвердження паролю"
+          variant="outlined"
+          color="primary"
+          className={classes.textField}
+          onChange={this.handleFormFieldChange('passwordConfirm')}
+          value={login}
         />
 
         {error && error}
@@ -93,20 +98,20 @@ class LoginForm extends Component {
           className={classes.submit}
           onClick={this.handleSubmit}
         >
-          Увiйты
+          Змiнити пароль
         </Button>
       </>
     );
   }
 }
 
-LoginForm.propTypes = {
+PasswordResetForm.propTypes = {
   classes: PropTypes.object.isRequired,
   logIn: PropTypes.func.isRequired,
   callback: PropTypes.func.isRequired,
 };
 
-const StyledLoginForm = withStyles(styles)(LoginForm);
+const StyledLoginForm = withStyles(styles)(PasswordResetForm);
 
 const mapDispatch = dispatch => bindActionCreators({
   logIn,

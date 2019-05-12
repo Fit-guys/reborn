@@ -4,13 +4,16 @@ export default {
     flexDirection: 'column',
   },
   headerRoot: {
-    height: '20vh',
+    height: '23vh',
     maxHeight: '500px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
+  },
+  backImg: {
+    width: '100%',
   },
   contentRoot: {
     display: 'flex',
@@ -24,8 +27,8 @@ export default {
     alignItems: 'center',
   },
   avatar: {
-    height: '200px',
-    width: '200px',
+    height: '220px',
+    width: '220px',
     border: '10px solid white',
     transform: 'translate(0, -50%)',
   },
@@ -47,19 +50,21 @@ export default {
   },
   gameButton: {
     margin: '20px auto',
+    width: '100%',
   },
   userInfoHeading: {
     textAlign: 'left',
     display: 'flex',
     flexDirection: 'row',
     margin: '20px 0px',
+    borderBottom: '1px solid black',
   },
   bottomBordered: {
     width: '100%',
     borderBottom: '1px solid black',
   },
   shareButton: {
-    margin: '15px',
+    margin: '0 15px',
   },
   additionalUserInfo: {
     fontWeight: 'normal',

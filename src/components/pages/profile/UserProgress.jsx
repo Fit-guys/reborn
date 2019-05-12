@@ -77,7 +77,7 @@ class UserProgress extends React.Component {
             <Step key={label}>
               <StepLabel
                 StepIconComponent={StepIcon}
-                StepIconProps={{ text: index }}
+                StepIconProps={{ text: String(index) }}
                 classes={{ iconContainer: classes.stepIconContainer }}
               >
                 <Typography

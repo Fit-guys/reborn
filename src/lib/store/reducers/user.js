@@ -3,15 +3,19 @@ import { user as actionTypes } from '../action-types';
 const initialState = {
   authenticated: false,
   token: '',
-  id: '',
+  expires: '',
+  user: {},
 };
 
 export default (state = initialState, action) => {
-  const { type } = action;
+  const { type, payload } = action;
 
   switch (type) {
     case actionTypes.LOGIN:
-      return state;
+    case actionTypes.SIGNUP:
+      return { ...state, ...payload };
+    case actionTypes.GET_USER:
+      return { ...state, user: payload };
     default:
       return initialState;
   }
