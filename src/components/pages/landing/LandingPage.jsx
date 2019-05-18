@@ -15,7 +15,7 @@ import TechnologyInfo from './TechnologyInfo';
 
 class LandingPage extends Component {
   componentDidMount() {
-    //
+    // @
   }
 
   render() {
