@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 
 export default class Api {
-  static URL = 'http://localhost:3000/v1';
+  static URL = process.env.NODE_ENV === 'production' ? 'http://68.183.223.50:3000/v1' : 'http://localhost:3000/v1';
 
   static OPTIONS = {
     headers: {

@@ -10,6 +10,7 @@ const NavLink = ({ to, children, ...buttonProps }) => (
     color="primary"
     size="large"
     {...buttonProps}
+    style={window.location.pathname === to ? { display: 'none !important', ...buttonProps.style } : (buttonProps.style || {})}
     href={to}
   >
     {children}

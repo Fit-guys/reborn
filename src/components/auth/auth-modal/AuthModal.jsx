@@ -51,7 +51,7 @@ const AuthModal = ({ classes, open, toggle }) => {
             onChange={(_, value) => { setActiveTab(value); }}
           >
             <Tab label="Вхiд" />
-            <Tab label="Регiстрацiя" />
+            <Tab label="Pеєстрацiя" />
           </Tabs>
           <div className={classes.formRoot}>
             {activeTab === 0 && <LoginForm callback={redirectToProfile} />}

@@ -28,7 +28,7 @@ class NavBar extends Component {
       const position = window.scrollY;
       const transparent = position / 100;
 
-      if (transparent < 1.5) {
+      if (position < 100) {
         this.setState({ transparency: transparent > 1 ? 1 : transparent });
       }
     });
@@ -43,8 +43,9 @@ class NavBar extends Component {
     const { classes, authenticated, logOut } = this.props;
     const { transparency } = this.state;
     const isGame = window.location.pathname === Routes.GAME;
-    const buttonsColor = window.location.pathname === Routes.PROFILE && transparency < 0.3 ? 'secondary' : 'primary';
-    const buttonsVariant = (window.location.pathname === Routes.PROFILE && transparency < 0.3) || isGame ? 'contained' : 'outlined';
+    const isProfile = window.location.pathname === Routes.PROFILE;
+    const buttonsColor = isProfile && transparency < 0.3 ? 'secondary' : 'primary';
+    const buttonsVariant = (isProfile && transparency < 0.3) || isGame ? 'contained' : 'outlined';
     return (
       <div>
         <AppBar
@@ -59,7 +60,7 @@ class NavBar extends Component {
 
             <div>
               {authenticated && (
-              <NavLink variant={buttonsVariant} to={Routes.PROFILE} style={{ marginRight: '25px' }} color={buttonsColor}>
+              <NavLink variant={buttonsVariant} to={Routes.PROFILE} style={{ marginRight: '25px', display: isProfile ? 'none' : 'auto' }} color={buttonsColor}>
                 Профiль
               </NavLink>
               )}

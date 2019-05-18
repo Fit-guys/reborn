@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles, TextField, Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+
+import {
+  withStyles, TextField, Button, Typography,
+} from '@material-ui/core';
 
 import styles from '../auth/auth.styles';
 import Api, { Endpoints } from '../../lib/networking';
@@ -9,8 +13,10 @@ import Api, { Endpoints } from '../../lib/networking';
 class PasswordResetForm extends Component {
   state = {
     feedback: '',
+    name: '',
 
     error: '',
+    done: false,
   }
 
   validate = () => {
@@ -37,10 +43,14 @@ class PasswordResetForm extends Component {
       this.setState({ error });
       return;
     }
-    const { passwordConfirm: login, password } = this.state;
-    const json = await Api.post(Endpoints.USER_LOGIN, {
-      email: login,
-      password,
+
+    const { feedback, name } = this.state;
+    const { email } = this.props;
+
+    const json = await Api.post(Endpoints.FEEDBACK, {
+      email,
+      name,
+      text: feedback,
     });
 
     if (!json.status) {
@@ -48,16 +58,30 @@ class PasswordResetForm extends Component {
       return;
     }
 
-    // eslint-disable-next-line no-shadow
-    const { logIn, callback } = this.props;
-    const { expiresIn, userToken } = json;
-    await logIn(userToken, expiresIn);
-    callback();
+    this.setState({ done: true });
   }
 
   render() {
-    const { feedback, error } = this.state;
+    const {
+      feedback, name, error, done,
+    } = this.state;
     const { classes } = this.props;
+
+    if (done) {
+      return (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Typography variant="h4">Thank You !</Typography>
+        </div>
+      );
+    }
 
     return (
       <>
@@ -65,9 +89,19 @@ class PasswordResetForm extends Component {
         <TextField
           variant="outlined"
           color="primary"
-          type="textarea"
+          type="text"
           className={classes.textField}
-          label="Пароль"
+          label="Ваше iмя"
+          onChange={this.handleFormFieldChange('name')}
+          value={name}
+        />
+        <TextField
+          variant="outlined"
+          color="primary"
+          multiline
+          rows={4}
+          className={classes.textField}
+          label="Вiдгук"
           onChange={this.handleFormFieldChange('feedback')}
           value={feedback}
         />
@@ -80,7 +114,7 @@ class PasswordResetForm extends Component {
           className={classes.submit}
           onClick={this.handleSubmit}
         >
-          Увiйты
+          Надiслати
         </Button>
       </>
     );
@@ -89,10 +123,11 @@ class PasswordResetForm extends Component {
 
 PasswordResetForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  logIn: PropTypes.func.isRequired,
-  callback: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
 };
+
+const mapState = ({ user: { user: { email } } }) => ({ email });
 
 const StyledLoginForm = withStyles(styles)(PasswordResetForm);
 
-export default StyledLoginForm;
+export default connect(mapState)(StyledLoginForm);

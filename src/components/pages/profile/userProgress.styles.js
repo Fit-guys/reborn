@@ -1,6 +1,9 @@
 export default () => ({
   root: {
   },
+  SLRoot: {
+    height: '70px',
+  },
   stepperRoot: {
     width: '50px',
     height: '50px',

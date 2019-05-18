@@ -80,7 +80,7 @@ class SignUpForm extends Component {
       <>
         <TextField
           type="text"
-          label="Им'я користувача"
+          label="Iм'я користувача"
           variant="outlined"
           color="primary"
           onChange={this.handleFormFieldChange('username')}

@@ -22,7 +22,7 @@ class LoginForm extends Component {
     const { login, password } = this.state;
 
     if (!login || !password) {
-      return 'Якесь поле пусте як твоя голова.';
+      return 'Дiдько! Якесь поле пусте.';
     }
 
     return null;
@@ -93,7 +93,7 @@ class LoginForm extends Component {
           className={classes.submit}
           onClick={this.handleSubmit}
         >
-          Увiйты
+          Увiйти
         </Button>
       </>
     );

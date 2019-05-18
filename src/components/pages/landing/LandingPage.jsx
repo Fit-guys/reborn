@@ -37,7 +37,8 @@ class LandingPage extends Component {
               color="primary"
               className={classes.getStartedCaption}
             >
-              тут должен быть красивый текст, но она его ещё не придумала
+              Інформаційний веб-портал для школярів:
+              «Інженерія програмного забезпечення»
             </Typography>
             <Button
               size="large"

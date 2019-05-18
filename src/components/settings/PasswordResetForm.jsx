@@ -81,7 +81,7 @@ class PasswordResetForm extends Component {
           value={password}
         />
         <TextField
-          type="text"
+          type="password"
           label="Пiдтвердження паролю"
           variant="outlined"
           color="primary"

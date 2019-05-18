@@ -12,7 +12,8 @@ class Game extends Component {
         window.frames.game.postMessage({ name: 'user-story', data: story }, '*');
       }
       if (event.data.name === 'level-done') {
-        const { gameID, score, time } = event.data;
+        console.log(event.data);
+        const { gameID, score, time } = event.data.data;
         this.addUserStory(gameID, score, time);
       }
     });
@@ -20,6 +21,7 @@ class Game extends Component {
 
   addUserStory = async (gameId, score, time) => {
     const { token } = this.props;
+    console.log(gameId, score, time);
     const json = await Api.post(Endpoints.STORIES_ADD, {
       game_id: gameId,
       score,

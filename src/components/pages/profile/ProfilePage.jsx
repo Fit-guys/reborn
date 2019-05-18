@@ -64,8 +64,6 @@ class ProfilePage extends Component {
       return 'loading';
     }
 
-    console.log(user);
-
     return (
       <div className={classes.root}>
         <div className={classes.headerRoot}>
@@ -173,7 +171,7 @@ class ProfilePage extends Component {
             </Grid>
           </div>
           <div className={classes.userProgress}>
-            <UserProgress />
+            <UserProgress story={user.story} />
           </div>
         </div>
       </div>
