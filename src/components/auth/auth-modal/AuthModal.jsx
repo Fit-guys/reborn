@@ -19,6 +19,7 @@ import SignUpForm from '../SignUpForm';
 
 import { Routes } from '../../../app/constants';
 import styles from './authModal.styles';
+import PasswordForgotForm from '../PasswordForgotForm';
 
 const AuthModal = ({ classes, open, toggle }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -52,10 +53,12 @@ const AuthModal = ({ classes, open, toggle }) => {
           >
             <Tab label="Вхiд" />
             <Tab label="Pеєстрацiя" />
+            <Tab label="Вiдновити пароль" />
           </Tabs>
           <div className={classes.formRoot}>
             {activeTab === 0 && <LoginForm callback={redirectToProfile} />}
             {activeTab === 1 && <SignUpForm callback={redirectToProfile} />}
+            {activeTab === 2 && <PasswordForgotForm onSuccess={() => setActiveTab(0)} />}
           </div>
         </Paper>
       </Modal>

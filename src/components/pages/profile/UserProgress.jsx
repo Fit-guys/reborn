@@ -48,12 +48,12 @@ function getStepContent(step) {
 class UserProgress extends React.Component {
   state = {
     // eslint-disable-next-line react/destructuring-assignment
-    activeStep: this.props.story[this.props.story.length - 1].id,
+    activeStep: 0,
   };
 
   componentDidMount() {
     const { story } = this.props;
-    this.setState({ activeStep: story[story.length - 1].game_id });
+    this.setState({ activeStep: story.length });
   }
 
   handleNext = () => {
@@ -108,7 +108,7 @@ class UserProgress extends React.Component {
                 marginTop: '0px',
                 padding: '0px  0px 20px 80px',
                 borderWidth: '10px',
-                borderColor: story[story.length - 1].game_id >= (Number(index) - 1) ? '#250E2B' : 'gray',
+                borderColor: story.length - 2 >= (Number(index) - 1) ? '#250E2B' : 'gray',
               }}
               >
                 <Typography variant="h6" color="primary">{getStepContent(index)}</Typography>

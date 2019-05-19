@@ -7,7 +7,7 @@ const StepIcon = ({
 }) => {
   let color = 'gray';
 
-  if (completed || active || story[story.length - 1].game_id >= (Number(icon) - 1)) {
+  if (completed || active || story.length >= Number(icon) - 1) {
     color = '#250E2B';
   }
 

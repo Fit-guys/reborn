@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { withStyles, TextField, Button } from '@material-ui/core';
+import {
+  withStyles, TextField, Button, Divider, List,
+} from '@material-ui/core';
 import { logIn } from '../../lib/store/action-creators/user';
 
 import styles from '../auth/auth.styles';
 import Api, { Endpoints } from '../../lib/networking';
+import ResetProgressButton from './ResetProgressButton';
 
 class PasswordResetForm extends Component {
   state = {
@@ -16,6 +19,7 @@ class PasswordResetForm extends Component {
     password: '',
 
     error: '',
+    status: '',
   }
 
   validate = () => {
@@ -46,10 +50,12 @@ class PasswordResetForm extends Component {
       this.setState({ error });
       return;
     }
-    const { passwordConfirm: login, password } = this.state;
-    const json = await Api.post(Endpoints.USER_LOGIN, {
-      email: login,
-      password,
+    const { password } = this.state;
+    const { token } = this.props;
+    const json = await Api.put(Endpoints.PASS_CHANGE, {
+      newPassword: password,
+    }, {
+      Authorization: `Bearer ${token}`,
     });
 
     if (!json.status) {
@@ -58,19 +64,43 @@ class PasswordResetForm extends Component {
     }
 
     // eslint-disable-next-line no-shadow
-    const { logIn, callback } = this.props;
-    const { expiresIn, userToken } = json;
-    await logIn(userToken, expiresIn);
-    callback();
+    this.setState({ status: 'done' });
   }
 
   render() {
-    const { passwordConfirm: login, password, error } = this.state;
+    const {
+      passwordConfirm, password, error, status,
+    } = this.state;
     const { classes } = this.props;
 
     return (
       <>
+        <List style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignContent: 'center',
+          justifyContent: 'center',
+        }}
+        >
+          <Button
+            value="contained"
+            href={Api.URL + Endpoints.STATS}
+            download
+            style={{
+              backgroundColor: '#250E2B',
+              color: 'white',
+              margin: '10px 20px',
+            }}
+          >
+            Статистика
+          </Button>
+          <Divider />
 
+          <ResetProgressButton />
+          <Divider />
+        </List>
+        { status === 'done' && 'Пароль успiшно змiнено.'}
         <TextField
           variant="outlined"
           color="primary"
@@ -87,7 +117,7 @@ class PasswordResetForm extends Component {
           color="primary"
           className={classes.textField}
           onChange={this.handleFormFieldChange('passwordConfirm')}
-          value={login}
+          value={passwordConfirm}
         />
 
         {error && error}
@@ -107,8 +137,7 @@ class PasswordResetForm extends Component {
 
 PasswordResetForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  logIn: PropTypes.func.isRequired,
-  callback: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 const StyledLoginForm = withStyles(styles)(PasswordResetForm);
@@ -117,4 +146,6 @@ const mapDispatch = dispatch => bindActionCreators({
   logIn,
 }, dispatch);
 
-export default connect(null, mapDispatch)(StyledLoginForm);
+const mapState = ({ user: { token } }) => ({ token });
+
+export default connect(mapState, mapDispatch)(StyledLoginForm);

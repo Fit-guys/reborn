@@ -46,6 +46,31 @@ class NavBar extends Component {
     const isProfile = window.location.pathname === Routes.PROFILE;
     const buttonsColor = isProfile && transparency < 0.3 ? 'secondary' : 'primary';
     const buttonsVariant = (isProfile && transparency < 0.3) || isGame ? 'contained' : 'outlined';
+
+    if (isGame) {
+      return (
+        <div>
+          <AppBar
+            position={isGame ? 'absolute' : 'fixed'}
+            className={classes.rootDefault}
+          >
+            <Toolbar className={classes.toolbar}>
+
+              <div>
+                {authenticated && (
+                <NavLink variant={buttonsVariant} to={Routes.PROFILE} style={{ marginRight: '25px', display: isProfile ? 'none' : 'auto' }} color={buttonsColor}>
+                  Профiль
+                </NavLink>
+                )}
+
+              </div>
+
+            </Toolbar>
+          </AppBar>
+        </div>
+      );
+    }
+
     return (
       <div>
         <AppBar

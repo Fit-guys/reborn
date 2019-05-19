@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import GoogleLogin from 'react-google-login';
 
 import { withStyles, TextField, Button } from '@material-ui/core';
 import { logIn } from '../../lib/store/action-creators/user';
@@ -86,15 +87,35 @@ class LoginForm extends Component {
         />
 
         {error && error}
-
-        <Button
-          color="primary"
-          variant="contained"
-          className={classes.submit}
-          onClick={this.handleSubmit}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            margin: '10px',
+          }}
         >
+          <Button
+            color="primary"
+            variant="contained"
+            style={{ width: '192px', height: 43 }}
+            // className={classes.submit}
+            onClick={this.handleSubmit}
+          >
           Увiйти
-        </Button>
+          </Button>
+          <GoogleLogin
+            style={{ width: '100%' }}
+            clientId="408703587374-7hg6oot1d2r4dv2rokkdeeid0t1u4rql.apps.googleusercontent.com"
+            redirectUri="/"
+            buttonText="Увiйти через Google"
+            theme="dark"
+            onSuccess={console.log}
+            onFailure={console.log}
+          />
+        </div>
       </>
     );
   }

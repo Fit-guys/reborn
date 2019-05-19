@@ -14,6 +14,7 @@ import headerImage from '../images/profile_header.png';
 import styles from './profile.styles';
 import Api, { Endpoints } from '../../../lib/networking';
 import { Routes } from '../../../app/constants';
+import Stars from './Stars';
 
 class ProfilePage extends Component {
   static propTypes = {
@@ -79,9 +80,17 @@ class ProfilePage extends Component {
             <div className={classes.userTextInfo}>
               <Typography variant="h5" className={classes.nickname} gutterBottom color="primary">
                 {user.status}
-                {' '}
-                gun
+
               </Typography>
+
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+              >
+                <Stars rank={user.status} />
+              </div>
+
               <Typography variant="h4" className={classes.rank} gutterBottom color="primary">
                 {user.name}
               </Typography>
@@ -148,7 +157,7 @@ class ProfilePage extends Component {
                 item
                 className={classes.shareButton}
               >
-                <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com">
+                <a href="http://www.facebook.com/sharer.php?u=http://68.183.223.50:5000/&t=Інформаційний веб-портал для знайомства з IT-спеціальністю «Інженерія програмного забезпечення» за посиланням.">
                   <img className="share-button-image" src="https://img.icons8.com/color/48/000000/facebook-circled.png" alt="Facebook" />
                 </a>
               </Grid>
@@ -156,7 +165,7 @@ class ProfilePage extends Component {
                 item
                 className={classes.shareButton}
               >
-                <a href="https://telegram.me/share/url?url=<URL>&text=<TEXT>">
+                <a href="https://telegram.me/share/url?url=http://68.183.223.50:5000&text=Інформаційний веб-портал для знайомства з IT-спеціальністю «Інженерія програмного забезпечення» за посиланням.">
                   <img className="share-button-image" src="https://img.icons8.com/color/48/000000/telegram-app.png" alt="Telegram" />
                 </a>
               </Grid>
@@ -164,7 +173,7 @@ class ProfilePage extends Component {
                 item
                 className={classes.shareButton}
               >
-                <a href="https://twitter.com/share?url=https://simplesharebuttons.com">
+                <a href="https://twitter.com/share?url=http://68.183.223.50:5000/&text=Інформаційний веб-портал для знайомства з IT-спеціальністю «Інженерія програмного забезпечення» за посиланням.">
                   <img className="share-button-image" src="https://img.icons8.com/color/48/000000/twitter-circled.png" alt="Twitter" />
                 </a>
               </Grid>

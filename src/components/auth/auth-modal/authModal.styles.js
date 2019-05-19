@@ -6,8 +6,9 @@ export default () => ({
     alignItems: 'center',
   },
   modal: {
-    width: '30%',
-    minWidth: '300px',
+    width: '40%',
+    minWidth: '440px',
+    maxWidth: '600px',
     height: 'auto',
     borderRadius: '8px',
     display: 'flex',

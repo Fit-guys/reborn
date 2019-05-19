@@ -25,6 +25,22 @@ export default class Api {
     return json;
   }
 
+  static async delete(endpoint, headers = {}) {
+    const options = { ...Api.OPTIONS };
+    Object.keys(headers).forEach((key) => {
+      options.headers[key] = headers[key];
+    });
+
+    const response = await window.fetch(Api.URL + endpoint, {
+      ...options,
+      method: 'delete',
+    });
+
+    const json = await response.json();
+
+    return json;
+  }
+
   static async post(endpoint, body, headers = {}) {
     const options = { ...Api.OPTIONS };
     Object.keys(headers).forEach((key) => {
@@ -34,6 +50,23 @@ export default class Api {
     const response = await window.fetch(Api.URL + endpoint, {
       ...options,
       method: 'post',
+      body: JSON.stringify(body),
+    });
+
+    const json = await response.json();
+
+    return json;
+  }
+
+  static async put(endpoint, body, headers = {}) {
+    const options = { ...Api.OPTIONS };
+    Object.keys(headers).forEach((key) => {
+      options.headers[key] = headers[key];
+    });
+
+    const response = await window.fetch(Api.URL + endpoint, {
+      ...options,
+      method: 'put',
       body: JSON.stringify(body),
     });
 
