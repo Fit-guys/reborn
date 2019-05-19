@@ -164,7 +164,7 @@ function PasswordForgotForm({ classes, onSuccess }) {
     <>
       <TextField
         type="text"
-        label="Логiн"
+        label="E-mail"
         variant="outlined"
         color="primary"
         className={classes.textField}
