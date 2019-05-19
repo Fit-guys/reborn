@@ -37,7 +37,10 @@ class LandingPage extends Component {
               color="primary"
               className={classes.getStartedCaption}
             >
-              Ласкаво просимо до Iнформацiйного ВЕБ порталу
+              Ласкаво просимо до Iнформацiйного
+              <br />
+              {' '}
+ВЕБ-порталу
             </Typography>
             <Button
               size="large"
