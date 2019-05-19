@@ -109,6 +109,7 @@ class LoginForm extends Component {
           <GoogleLogin
             style={{ width: '100%' }}
             clientId="408703587374-7hg6oot1d2r4dv2rokkdeeid0t1u4rql.apps.googleusercontent.com"
+            scope="https://www.googleapis.com/auth/drive.metadata.readonly"
             redirectUri="/"
             buttonText="Увiйти через Google"
             theme="dark"
