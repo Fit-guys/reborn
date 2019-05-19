@@ -178,6 +178,14 @@ class ProfilePage extends Component {
                 </a>
               </Grid>
             </Grid>
+            <Grid
+              item
+              className={classes.shareButton}
+            >
+              <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://68.183.223.50:5000&title=Інформаційний веб-портал&summary=Інформаційний веб-портал для знайомства з IT-спеціальністю «Інженерія програмного забезпечення» за посиланням.&source=http://68.183.223.50:5000">
+                <img className="share-button-image" src="https://img.icons8.com/color/48/000000/twitter-circled.png" alt="Twitter" />
+              </a>
+            </Grid>
           </div>
           <div className={classes.userProgress}>
             <UserProgress story={user.story} />
