@@ -1,76 +1,9 @@
-* {
-   margin: 0;
-   padding: 0;
-}
-.div {
-    overflow-y: hidden;
-    overflow-x: hidden;
-}
-
-.img-background {
-   position: fixed;
-   height: 100%;
-   width: 100%;
-   z-index: -1;
-   background-size: fixed;
-   background-repeat: no-repeat;
-   background-position: center center;
-   margin-top: -65px;
-}
-
-.column { 
-   height: 100pc;
-   background-color: white;
-}
 
 
-.user-image {
-   
+.share-button-image {
+   width: 38px;
+   height: 38px;
 }
-
-.user-image-container {
-   position: fixed;
-      width: 200px;
-      height: 200px;
-}
-
-.grid-container {
-   position: fixed;
-   height: 100vh;
-}
-
-.user-info-container {
-   width: 100%;
-   height: 100%;
-}
-
-.progress-bar {
-   width: 100%;
-   height: 100%;
-}
-
-.info-container {
-   
-}
-.top-part {
-   text-align: center;
-}
-
- .share-button-image {
-   width: 50px;
-   padding: 5px;
-   border: 0;
-   box-shadow: 0;
-   display: inline;
-}
-
-.line{
-   margin-top: -12px;
-   width: 112px;
-   height: 47px;
-   border-bottom: 1px solid #41254E;
-}
-
 @media all and (max-width: 800px) {
    .grid-container{
       display: flex;

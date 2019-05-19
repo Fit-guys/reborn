@@ -53,7 +53,7 @@ class UserProgress extends React.Component {
 
   componentDidMount() {
     const { story } = this.props;
-    this.setState({ activeStep: story.length });
+    this.setState({ activeStep: story.length - 1 });
   }
 
   handleNext = () => {
@@ -108,7 +108,7 @@ class UserProgress extends React.Component {
                 marginTop: '0px',
                 padding: '0px  0px 20px 80px',
                 borderWidth: '10px',
-                borderColor: story.length - 2 >= (Number(index) - 1) ? '#250E2B' : 'gray',
+                borderColor: story.length - 2 >= (Number(index)) ? '#250E2B' : 'gray',
               }}
               >
                 <Typography variant="h6" color="primary">{getStepContent(index)}</Typography>

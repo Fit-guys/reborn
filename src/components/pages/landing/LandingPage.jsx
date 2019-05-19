@@ -37,8 +37,7 @@ class LandingPage extends Component {
               color="primary"
               className={classes.getStartedCaption}
             >
-              Інформаційний веб-портал для школярів:
-              «Інженерія програмного забезпечення»
+              Ласкаво просимо до Iнформацiйного ВЕБ порталу
             </Typography>
             <Button
               size="large"

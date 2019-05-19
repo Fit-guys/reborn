@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -15,6 +16,8 @@ import styles from './profile.styles';
 import Api, { Endpoints } from '../../../lib/networking';
 import { Routes } from '../../../app/constants';
 import Stars from './Stars';
+
+import './index.css';
 
 class ProfilePage extends Component {
   static propTypes = {
@@ -73,7 +76,7 @@ class ProfilePage extends Component {
         <div className={classes.contentRoot}>
           <div className={classes.userInfo}>
             <Avatar
-              src="https://cdn22.img.ria.ru/images/155255/64/1552556441_0:1:800:451_600x0_80_0_0_dd5f77200f0f5b96dbd6dc2c2420e20c.png"
+              src="https://png.pngtree.com/element_origin_min_pic/16/05/26/185746d1ababfa9.jpg"
               style={{ background: 'pink' }}
               className={classes.avatar}
             />
@@ -126,7 +129,7 @@ class ProfilePage extends Component {
                 component="h6"
                 color="primary"
               >
-                Результаты
+                Результати
               </Typography>
 
               <Typography variant="h6" className={classes.additionalUserInfo} component="h6" gutterBottom color="primary">
@@ -177,15 +180,20 @@ class ProfilePage extends Component {
                   <img className="share-button-image" src="https://img.icons8.com/color/48/000000/twitter-circled.png" alt="Twitter" />
                 </a>
               </Grid>
+              <Grid
+                item
+                className={classes.shareButton}
+              >
+                <a
+                  href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURI('https://github.com/Fit-guys/reborn')}&title=Cyber Unicorns Are Cool !&summary=Інформаційний веб-портал для знайомства з IT-спеціальністю «Інженерія програмного забезпечення» за посиланням.&source='http://68.183.223.50:5000/'`}
+                  rel="noopener"
+                  target="_blank"
+                >
+                  <img className="share-button-image" src="https://cdn1.iconfinder.com/data/icons/logotypes/32/square-linkedin-512.png" alt="Twitter" />
+                </a>
+              </Grid>
             </Grid>
-            <Grid
-              item
-              className={classes.shareButton}
-            >
-              <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://68.183.223.50:5000&title=Інформаційний веб-портал&summary=Інформаційний веб-портал для знайомства з IT-спеціальністю «Інженерія програмного забезпечення» за посиланням.&source=http://68.183.223.50:5000">
-                <img className="share-button-image" src="https://img.icons8.com/color/48/000000/twitter-circled.png" alt="Twitter" />
-              </a>
-            </Grid>
+
           </div>
           <div className={classes.userProgress}>
             <UserProgress story={user.story} />

@@ -64,7 +64,8 @@ export default {
     borderBottom: '1px solid black',
   },
   shareButton: {
-    margin: '0 15px',
+    margin: '0 10px',
+
   },
   additionalUserInfo: {
     fontWeight: 'normal',

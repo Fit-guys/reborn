@@ -16,4 +16,9 @@ export default {
     display: 'flex',
     justifyContent: 'space-between',
   },
+  toolbarGame: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+  },
 };

@@ -54,7 +54,7 @@ class NavBar extends Component {
             position={isGame ? 'absolute' : 'fixed'}
             className={classes.rootDefault}
           >
-            <Toolbar className={classes.toolbar}>
+            <Toolbar className={classes.toolbarGame}>
 
               <div>
                 {authenticated && (
