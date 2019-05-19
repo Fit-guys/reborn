@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import GoogleLogin from 'react-google-login';
+// import GoogleLogin from 'react-google-login';
 
 import { withStyles, TextField, Button } from '@material-ui/core';
 import { logIn } from '../../lib/store/action-creators/user';
@@ -106,7 +106,7 @@ class LoginForm extends Component {
           >
           Увiйти
           </Button>
-          <GoogleLogin
+          {/* <GoogleLogin
             style={{ width: '100%' }}
             clientId="408703587374-7hg6oot1d2r4dv2rokkdeeid0t1u4rql.apps.googleusercontent.com"
             scope="https://www.googleapis.com/auth/drive.metadata.readonly"
@@ -115,7 +115,7 @@ class LoginForm extends Component {
             theme="dark"
             onSuccess={console.log}
             onFailure={console.log}
-          />
+          /> */}
         </div>
       </>
     );
